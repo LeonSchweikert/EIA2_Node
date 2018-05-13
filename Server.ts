@@ -14,7 +14,7 @@ namespace Server {
     server.addListener("listening", handleListen);
     server.addListener("request", handleRequest);
     server.listen(port);
-
+ 
     function handleListen(): void {
         console.log("Ich höre?");
     }
