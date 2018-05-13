@@ -1,0 +1,15 @@
+{
+	"name" : "Servertest",
+	"version" : "1.0.0",
+	"description" : "First Server Test",
+	"author" : "Leon",
+	"main" : "Server.js",
+	"scripts" : {
+		"start" : "node Server.js"
+	},
+	"engines" : {
+		"node" : "8.10.0"
+	},
+	"dependencies" : {
+	}
+}
