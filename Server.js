@@ -23,8 +23,8 @@ var Server;
         _response.setHeader("content-type", "text/html; charset=utf-8");
         _response.setHeader("Access-Control-Allow-Origin", "*");
         _response.write("Ich habe dich gehört<br/>");
-        _response.write("Query1:3<br/>");
-        _response.write("Query1:5<br/>");
+        for (let key in query)
+        	_response.write("Query-Informationen: " + (query[key]) + "</br>");
         _response.write("Das Ergebnis ist: " + (a + b));
         _response.end();
     }
