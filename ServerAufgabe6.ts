@@ -29,18 +29,21 @@ namespace ServerResponse {
         port = 8100;
 
     let servererstellen: Http.Server = Http.createServer((_request: Http.IncomingMessage, _response: Http.ServerResponse) => {    //Server wird erstellt
-        _response.setHeader("content-type", "text/html; charset=utf-8");
-        _response.setHeader("Access-Control-Allow-Origin", "*");
+        
     });
     servererstellen.addListener("request", handleRequest);
     servererstellen.listen(port);
 
+    
+    
     function handleRequest(_request: Http.IncomingMessage, _response: Http.ServerResponse): void {
         
         console.log("Hallo!");
         
         let query: AssocStringString = Url.parse(_request.url, true).query;
         console.log(query["command"]);
+        _response.setHeader("content-type", "text/html; charset=utf-8");
+        _response.setHeader("Access-Control-Allow-Origin", "*");
         
         if (query["command"] ) {
             switch (query["command"] ) {
