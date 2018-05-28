@@ -3,7 +3,7 @@
 	"version" : "1.0.0",
 	"description" : "First Server Test",
 	"author" : "Leon",
-	"main" : "Server.js",
+	"main" : "ServerV2.js",
 	"scripts" : {
 		"start" : "node Server.js"
 	},
