@@ -5,7 +5,7 @@
 	"author" : "Leon",
 	"main" : "ServerV2.js",
 	"scripts" : {
-		"start" : "node Server.js"
+		"start" : "node ServerV2.js"
 	},
 	"engines" : {
 		"node" : "8.10.0"
