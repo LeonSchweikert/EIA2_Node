@@ -65,10 +65,10 @@ var ServerResponse;
         }
     }
     function search(query, _response) {
-        let studi = studentAssoc[query["searchMat"]];
+        let studi = studentAssoc[query["searchFor"]];
         //Suche nach Matrikelnummer
         if (studi) {
-            let line = query["searchMat"] + ": ";
+            let line = query["searchFor"] + ": ";
             line += studi.studiengang + ", " + studi.name + ", " + studi.firstname + ", " + studi.age + " Years ";
             line += studi.gender ? "(M)" : "(F)";
             _response.write(line);

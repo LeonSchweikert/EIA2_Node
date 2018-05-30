@@ -104,10 +104,10 @@ namespace ServerResponse {
         } 
         
         function search(query: AssocStringString, _response: Http.ServerResponse): void {              //Suchfunktion
-            let studi: Student = studentAssoc[query["searchMat"]];  
+            let studi: Student = studentAssoc[query["searchFor"]];  
                                                                                                 //Suche nach Matrikelnummer
             if (studi) {
-                let line: string = query["searchMat"] + ": ";
+                let line: string = query["searchFor"] + ": ";
                 line += studi.studiengang + ", " + studi.name + ", " + studi.firstname + ", " + studi.age + " Years ";
                 line += studi.gender ? "(M)" : "(F)";
                 
