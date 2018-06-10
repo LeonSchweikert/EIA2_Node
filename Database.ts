@@ -1,20 +1,21 @@
-import * as Mongo from "mongodb";
+
+import * as Mongo from "mongodb";   //Daten von MongoDB empfangen
 console.log("Database starting");
 
-let databaseURL: string = "mongodb://localhost:27017";
+let databaseURL: string = "mongodb://localhost:27017";  //local host port
 let databaseName: string = "Test";
 let db: Mongo.Db;
-let students: Mongo.Collection;
-// wenn wir auf heroku sind...
+let accounts: Mongo.Collection;   //neue Datensätze in Form von Accounts werden Collection hinzugefügt
+
 if (process.env.NODE_ENV == "production") {
-    //    databaseURL = "mongodb://username:password@hostname:port/database";
-    databaseURL =  "mongodb://testuser:testpasswort1@ds141720.mlab.com:41720/leoneia";
+    
+    databaseURL =  "mongodb://testuser:testpasswort1@ds141720.mlab.com:41720/leoneia";   //url mlab mit Passwort und Benutzername
  
-    databaseName = "leoneia";
+    databaseName = "leoneia";   //name der Database auf Mlab
 }
 
-// handleConnect wird aufgerufen wenn der Versuch, die Connection zur Datenbank herzustellen, erfolgte
-Mongo.MongoClient.connect(databaseURL, handleConnect);
+
+Mongo.MongoClient.connect(databaseURL, handleConnect);   //connection zu Database erstellen
 
 function handleConnect(_e: Mongo.MongoError, _db: Mongo.Db): void {
     if (_e)
@@ -22,12 +23,12 @@ function handleConnect(_e: Mongo.MongoError, _db: Mongo.Db): void {
     else {
         console.log("Connected to database!");
         db = _db.db(databaseName);
-        students = db.collection("students");
+        accounts = db.collection("students");
     }
 }
 
-export function insert(_doc: Studi): void {
-    students.insertOne(_doc, handleInsert);
+export function insert(_doc: Studi): void {  //insert der Arrays mit Daten
+    accounts.insertOne(_doc, handleInsert);
 }
 
 function handleInsert(_e: Mongo.MongoError): void {
@@ -35,7 +36,7 @@ function handleInsert(_e: Mongo.MongoError): void {
 }
 
 export function findAll(_callback: Function): void {
-    var cursor: Mongo.Cursor = students.find();
+    var cursor: Mongo.Cursor = accounts.find();
     cursor.toArray(prepareAnswer);
 
     function prepareAnswer(_e: Mongo.MongoError, studentArray: Studi[]): void {
@@ -54,9 +55,12 @@ export function findAll(_callback: Function): void {
 }
 
 export function findStudent(searchedMatrikel: number, _callback: Function): void {
-    var myCursor: Mongo.Cursor = students.find({ "matrikel": searchedMatrikel }).limit(1);
+    
+    
+    var myCursor: Mongo.Cursor = accounts.find({ "matrikel": searchedMatrikel }).limit(1);
     myCursor.next(prepareStudent);
 
+    
     function prepareStudent(_e: Mongo.MongoError, studi: Studi): void {
         if (_e) {
             _callback("Error" + _e);
@@ -67,7 +71,7 @@ export function findStudent(searchedMatrikel: number, _callback: Function): void
             line += studi.gender ? "(M)" : "(F)";
             _callback(line);
         } else {
-            _callback("No Match");
+            _callback("No Match");   //falls gesuchte Matrikel und Datensatz nicht übereinstimmen
         }
     }
 }
