@@ -8,13 +8,12 @@ let students: Mongo.Collection;
 // wenn wir auf heroku sind...
 if (process.env.NODE_ENV == "production") {
     //    databaseURL = "mongodb://username:password@hostname:port/database";
-    databaseURL = "mongodb://testuser:testpassword1@ds141870.mlab.com:41870/eia2_data";
-    databaseName = "eia2_data";
+    databaseURL =  "mongodb://<dbuser>:<dbpassword>@ds141720.mlab.com:41720/leoneia";
+    databaseName = "leoneia";
 }
 
 // handleConnect wird aufgerufen wenn der Versuch, die Connection zur Datenbank herzustellen, erfolgte
 Mongo.MongoClient.connect(databaseURL, handleConnect);
-
 
 function handleConnect(_e: Mongo.MongoError, _db: Mongo.Db): void {
     if (_e)
@@ -34,7 +33,6 @@ function handleInsert(_e: Mongo.MongoError): void {
     console.log("Database insertion returned -> " + _e);
 }
 
-
 export function findAll(_callback: Function): void {
     var cursor: Mongo.Cursor = students.find();
     cursor.toArray(prepareAnswer);
@@ -43,15 +41,14 @@ export function findAll(_callback: Function): void {
         if (_e) {
             _callback("Error" + _e);
         } else {
-            let line: string;
+            let line: string = "";
             for (let i: number = 0; i < studentArray.length; i++) {
                 line += studentArray[i].matrikel + ": " + studentArray[i].studiengang + ", " + studentArray[i].name + ", " + studentArray[i].firstname + ", " + studentArray[i].age + ", ";
                 line += studentArray[i].gender ? "(M)" : "(F)";
                 line += "\n";
             }
-
             _callback(line);
-        }
+        } 
     }
 }
 
@@ -71,6 +68,5 @@ export function findStudent(searchedMatrikel: number, _callback: Function): void
         } else {
             _callback("No Match");
         }
-
     }
 }

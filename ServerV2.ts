@@ -1,3 +1,4 @@
+
 import * as Http from "http";
 import * as Url from "url";
 import * as Database from "./Database";
@@ -53,7 +54,7 @@ import * as Database from "./Database";
                 studiengang: _studiengang
             };  
             Database.insert(studi);
-            respond(_response, "Daten empfangen");
+            respond(_response, "Transmission successful");
             }
 
         function refresh(_response: Http.ServerResponse): void {
@@ -70,7 +71,7 @@ import * as Database from "./Database";
         }
         
         function error(): void {
-            alert("Error"); 
+            alert("Not found"); 
         }
     
 function respond(_response: Http.ServerResponse, _text: string): void {

@@ -46,7 +46,7 @@ function insert(query, _response) {
         studiengang: _studiengang
     };
     Database.insert(studi);
-    respond(_response, "Daten empfangen");
+    respond(_response, "Transmission successful");
 }
 function refresh(_response) {
     Database.findAll(function (json) {
@@ -60,7 +60,7 @@ function search(query, _response) {
     });
 }
 function error() {
-    alert("Error");
+    alert("Not found");
 }
 function respond(_response, _text) {
     _response.setHeader("content-type", "text/html; charset=utf-8");
