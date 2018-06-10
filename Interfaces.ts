@@ -1,4 +1,4 @@
-interface AssocStringString {
+interface AssocStringString {      //Struktur des Assoziativen Arrays in dieser Form werden Daten in Database gesendet
         [key: string]: string;
     }
     
